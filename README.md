@@ -6,7 +6,7 @@ This project was developed as a practical assignment (*contrôle*) for the **Mat
 
 ---
 
-## 🎓 Academic Context
+##  Academic Context
 
 * **Institution:** ESI Rabat (École des Sciences de l'Information)
 * **Level:** 1st Year Engineering Cycle (*1ère année Cycle Ingénieur*)
@@ -18,7 +18,7 @@ This project was developed as a practical assignment (*contrôle*) for the **Mat
 
 ---
 
-## ✨ Features
+##  Features
 
 * **Interactive GUI:** Built with PyQt6 for a modern, responsive, and dark-themed user experience.
 * **Dynamic Matrix Sizing:** Easily scale the matrix dimension $A$ (up to 10x10) directly from the interface.
@@ -39,7 +39,7 @@ The application follows a clean separation of concerns:
 
 ---
 
-## 🚀 Getting Started
+##  Getting Started
 
 ### Prerequisites
 
@@ -63,11 +63,11 @@ pip install PyQt6 numpy
 
 ---
 
-## 💡 How to Use
+##  How to Use
 
 1. **Set Dimensions:** Choose the matrix size (1 to 10) and click **Set**.
 2. **Input Data:** Fill in the matrix $A$ and the vector $b$. You can also optionally set a starting vector $X_0$.
-3. **Set Parameters:** 
+3. *Set Parameters:** 
    * Adjust the relaxation factor $\omega$ (between 0 and 2).
    * *Tip: Click **Best w** to let the engine find the optimal parameter for your specific matrix.*
    * Define your target precision $\epsilon$ (e.g., `1e-6`) and the maximum number of iterations.
@@ -75,6 +75,6 @@ pip install PyQt6 numpy
 
 ---
 
-## 📝 License
+##  License
 
 This project is created for educational purposes within the curriculum of ESI Rabat.
