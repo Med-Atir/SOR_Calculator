@@ -30,7 +30,7 @@ This project was developed as a practical assignment (*contrôle*) for the **Mat
 
 ---
 
-## 🛠️ Architecture
+##  Architecture
 
 The application follows a clean separation of concerns:
 * `engine.py`: The numerical core containing all mathematical logic (NumPy operations, SOR algorithm, matrix decomposition).
