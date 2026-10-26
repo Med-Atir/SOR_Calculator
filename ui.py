@@ -274,7 +274,7 @@ class SorWindow(QMainWindow):
 
         D, L, U = engine.decomposer(A)
         try:
-            B_sor, M_sor, rho_B = engine.verifier_convergence_sor(D, L, U, omega)
+            B, M, rho_B = engine.verifier_convergence(D, L, U, omega)
         except engine.np.linalg.LinAlgError:
             self.afficher("Numerical failure while building the SOR matrix.", "error")
             return
@@ -288,19 +288,19 @@ class SorWindow(QMainWindow):
             )
             self.afficher(f"SOR does not converge: ρ(B) = {rho_B:.4f} ≥ 1. {conseil}", "error")
             self.ecrire_rapport(
-                f"ρ(B_SOR) = {rho_B:.6f} ≥ 1\n"
+                f"ρ(B) = {rho_B:.6f} ≥ 1\n"
                 "The iteration matrix has a spectral radius that is too large,\n"
                 "so the method diverges for most starting vectors.\n\n" + conseil
             )
             return
 
-        C_sor = omega * engine.np.linalg.solve(M_sor, b)
+        C = omega * engine.np.linalg.solve(M, b)
 
         QApplication.setOverrideCursor(Qt.CursorShape.WaitCursor)
         t0 = time.perf_counter()
         try:
-            X, k, erreur, residu, statut, historique = engine.calculer_iteration_sor(
-                A, b, B_sor, C_sor, X0, epsilon, Nmax
+            X, k, erreur, residu, statut, historique = engine.calculer_iteration(
+                A, b, B, C, X0, epsilon, Nmax
             )
         finally:
             QApplication.restoreOverrideCursor()
@@ -319,7 +319,7 @@ class SorWindow(QMainWindow):
 
         lignes = [
             f"ω = {omega:.2f}    ε = {epsilon:g}    Nmax = {Nmax}",
-            f"ρ(B_SOR) = {rho_B:.6f}  →  convergence guaranteed",
+            f"ρ(B) = {rho_B:.6f}  →  convergence guaranteed",
             f"Estimated iterations needed ≈ {estimation}",
             "",
             f"Iterations performed : {k}",

@@ -12,22 +12,22 @@ def decomposer(A):
     return D, L, U
 
 
-def verifier_convergence_sor(D, L, U, omega):
-    M_sor = D - omega * L
-    N_sor = (1 - omega) * D + omega * U
-    B_sor = np.linalg.solve(M_sor, N_sor)
-    rho_B = float(np.max(np.abs(np.linalg.eigvals(B_sor))))
-    return B_sor, M_sor, rho_B
+def verifier_convergence(D, L, U, omega):
+    M = D - omega * L
+    N = (1 - omega) * D + omega * U
+    B = np.linalg.solve(M, N)
+    rho_B = float(np.max(np.abs(np.linalg.eigvals(B))))
+    return B, M, rho_B
 
 
-def calculer_iteration_sor(A, b, B_sor, C_sor, X0, epsilon, Nmax):
+def calculer_iteration(A, b, B, C, X0, epsilon, Nmax):
     X = X0.copy()
     historique = [(0, X0.copy(), None, float(np.linalg.norm(A @ X0 - b)))]
     erreur = np.inf
     residu = historique[0][3]
 
     for k in range(1, Nmax + 1):
-        X_nouveau = B_sor @ X + C_sor
+        X_nouveau = B @ X + C
         erreur = float(np.linalg.norm(X_nouveau - X))
         residu = float(np.linalg.norm(A @ X_nouveau - b))
         historique.append((k, X_nouveau.copy(), erreur, residu))
@@ -91,7 +91,7 @@ def meilleur_omega(A):
     for w in np.arange(0.05, 2.0, 0.01):
         w = float(np.round(w, 2))
         try:
-            _, _, rho = verifier_convergence_sor(D, L, U, w)
+            _, _, rho = verifier_convergence(D, L, U, w)
         except np.linalg.LinAlgError:
             continue
         if rho < meilleur[1]:
